@@ -1,0 +1,156 @@
+/* =========================================
+   VOVINAM MAIN STYLESHEET
+   Author: Phan Văn Võ
+   Version: 1.1
+   ========================================= */
+
+/* ----------------------------------------
+   1. GLOBAL RESET & VARIABLES
+   ---------------------------------------- */
+
+/* Modern CSS Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Custom Properties */
+:root {
+    /* Main Colors */
+    --primary-color: #4a7cd1;       /* Xanh Vovinam nhạt hơn */
+    --primary-light: #3a78d4;       /* Xanh sáng */
+    --primary-dark: #2f5ba6;        /* Xanh đậm nhạt hơn */
+    --secondary-color: #c71815;     /* Đỏ Vovinam */
+    --accent-color: #ffde59;        /* Vàng Vovinam */
+    
+    /* Text Colors */
+    --text-light: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-muted: #9ba3af;
+    
+    /* Neutral Colors */
+    --neutral-100: #f3f4f6;
+    --neutral-200: #e5e7eb;
+    --neutral-300: #d1d5db;
+    
+    /* Effect Colors */
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --glow-color: rgba(255, 222, 89, 0.15);
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ----------------------------------------
+   2. BASE ELEMENTS
+   ---------------------------------------- */
+
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ----------------------------------------
+   3. LAYOUT & STRUCTURE
+   ---------------------------------------- */
+
+.logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.title {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    background-color: rgba(30, 90, 187, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.glowing-border {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid var(--glow-color);
+    border-radius: var(--radius-md);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ----------------------------------------
+   4. COMPONENTS
+   ---------------------------------------- */
+
+/* Logo Image */
+.logo-img {
+    max-width: 65%;
+    max-height: 65%;
+    filter: drop-shadow(0 10px 20px var(--shadow-color));
+    transition: transform var(--transition-slow);
+}
+
+/* Logo Container Halo Effect */
+.logo-container::before {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(30, 90, 187, 0) 70%
+    );
+    z-index: -1;
+}
+
+/* ----------------------------------------
+   5. HOVER & INTERACTIVE STATES
+   ---------------------------------------- */
+
+.logo-img:hover {
+    transform: scale(1.02);
+}
+
+.title:hover {
+    background-color: rgba(30, 90, 187, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
