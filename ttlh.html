@@ -10,6 +10,35 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+          /* Nút Trang chủ (CSS mới từ bạn) */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 101;
+            transition: var(--transition-normal);
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .home-button img {
+            width: 60%; /* Điều chỉnh kích thước hình ảnh bên trong nút */
+            height: 60%;
+        }
+
+        .home-button:hover {
+            transform: scale(1.1); /* Thêm hiệu ứng phóng to khi hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
         /* Định nghĩa các biến CSS */
         :root {
             --space-xl: 40px;
@@ -385,35 +414,7 @@
             }
         }
 
-        /* Nút Trang chủ (CSS mới từ bạn) */
-        .home-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 101;
-            transition: var(--transition-normal);
-            color: var(--text-light);
-            text-decoration: none;
-        }
-
-        .home-button img {
-            width: 60%; /* Điều chỉnh kích thước hình ảnh bên trong nút */
-            height: 60%;
-        }
-
-        .home-button:hover {
-            transform: scale(1.1); /* Thêm hiệu ứng phóng to khi hover */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
+      
 
         /* Responsive */
         @media screen and (max-width: 1024px) {
