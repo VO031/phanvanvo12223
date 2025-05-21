@@ -546,6 +546,7 @@
 
             gridBoxes.forEach(box => {
                 const boxText = removeAccents(box.querySelector('span').textContent.toLowerCase());
+                // Kiểm tra xem tất cả ký tự trong searchTerm có xuất hiện trong boxText không
                 let isMatch = true;
                 if (searchTerm !== '') {
                     for (let char of searchTerm) {
@@ -555,6 +556,7 @@
                         }
                     }
                 }
+                // Hiển thị hoặc ẩn ô dựa trên kết quả khớp
                 if (isMatch) {
                     box.classList.remove('hidden');
                 } else {
