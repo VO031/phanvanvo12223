@@ -11,6 +11,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <script>
+function logout() {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
+    localStorage.removeItem('loginTime');
+    window.location.href = 'index.html';
+}
+    </script>
+
+    <script>
+    // Kiểm tra xác thực
+    function checkAuth() {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        const loginTime = localStorage.getItem('loginTime');
+        
+        // Nếu chưa đăng nhập hoặc phiên đã hết hạn (24 giờ)
+        if (!isAuthenticated || (Date.now() - parseInt(loginTime)) > 24 * 60 * 60 * 1000) {
+            // Xóa dữ liệu xác thực nếu có
+            localStorage.removeItem('isAuthenticated');
+            localStorage.removeItem('username');
+            localStorage.removeItem('loginTime');
+            
+            // Chuyển hướng về trang đăng nhập
+            window.location.href = 'index.html';
+        }
+    }
+    
+    // Thực hiện kiểm tra ngay khi trang tải
+    checkAuth();
+</script>
+
     <!-- Hạt sáng di chuyển -->
     <div class="particles">
         <div class="particle"></div>
@@ -32,12 +63,12 @@
     <div class="title">Phan Văn Võ</div>
 
     <!-- Nút đăng xuất -->
-    <div class="logout-container" style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
-        <a href="index.html" class="logout-button" style="display: inline-flex; align-items: center; padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; transition: background-color 0.3s;">
-            <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>
-            Đăng Xuất
-        </a>
-    </div>
+ <div class="logout-container" style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
+    <a href="javascript:void(0)" onclick="logout()" class="logout-button" style="display: inline-flex; align-items: center; padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; transition: background-color 0.3s;">
+        <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>
+        Đăng Xuất
+    </a>
+</div>
 
     <!-- Menu bên trái -->
     <nav class="side-menu">
@@ -78,5 +109,6 @@
         </ul>
     </nav>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93d8ba2df878bca4',t:'MTc0Njg3MjY3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
 </body>
 </html>

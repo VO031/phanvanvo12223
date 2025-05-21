@@ -147,41 +147,37 @@
 
         // Hàm đăng nhập
         function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
 
-            console.log('Attempting login with username:', username);
+    if (!username || !password) {
+        errorMessage.textContent = 'Vui lòng nhập đầy đủ thông tin!';
+        return;
+    }
 
-            if (!username || !password) {
-                errorMessage.textContent = 'Vui lòng nhập đầy đủ thông tin!';
-                console.log('Missing username or password');
-                return;
+    // Kiểm tra thông tin đăng nhập trong Realtime Database
+    database.ref('users/' + username).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            if (userData.password === password) {
+                // Lưu thông tin xác thực vào localStorage
+                localStorage.setItem('isAuthenticated', 'true');
+                localStorage.setItem('username', username);
+                // Thêm timestamp để kiểm soát thời gian phiên
+                localStorage.setItem('loginTime', Date.now());
+                
+                window.location.href = 'home.html';
+            } else {
+                errorMessage.textContent = 'Mật khẩu không đúng!';
             }
-
-            // Kiểm tra thông tin đăng nhập trong Realtime Database
-            database.ref('users/' + username).once('value').then((snapshot) => {
-                console.log('Snapshot exists:', snapshot.exists());
-                if (snapshot.exists()) {
-                    const userData = snapshot.val();
-                    console.log('User data:', userData);
-                    if (userData.password === password) {
-                        console.log('Login successful, redirecting to home.html');
-                        window.location.href = 'home.html';
-                    } else {
-                        errorMessage.textContent = 'Mật khẩu không đúng!';
-                        console.log('Incorrect password');
-                    }
-                } else {
-                    errorMessage.textContent = 'Tên đăng nhập không tồn tại!';
-                    console.log('Username does not exist');
-                }
-            }).catch((error) => {
-                errorMessage.textContent = 'Lỗi: ' + error.message;
-                console.log('Firebase error:', error);
-            });
+        } else {
+            errorMessage.textContent = 'Tên đăng nhập không tồn tại!';
         }
-
+    }).catch((error) => {
+        errorMessage.textContent = 'Lỗi: ' + error.message;
+    });
+}
         // Xử lý nhấn Enter
         document.getElementById('username').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
