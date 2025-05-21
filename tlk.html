@@ -392,6 +392,27 @@
     </style>
 </head>
 <body>
+       <script>
+    // Kiểm tra xác thực
+    function checkAuth() {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        const loginTime = localStorage.getItem('loginTime');
+        
+        // Nếu chưa đăng nhập hoặc phiên đã hết hạn (24 giờ)
+        if (!isAuthenticated || (Date.now() - parseInt(loginTime)) > 24 * 60 * 60 * 1000) {
+            // Xóa dữ liệu xác thực nếu có
+            localStorage.removeItem('isAuthenticated');
+            localStorage.removeItem('username');
+            localStorage.removeItem('loginTime');
+            
+            // Chuyển hướng về trang đăng nhập
+            window.location.href = 'index.html';
+        }
+    }
+    
+    // Thực hiện kiểm tra ngay khi trang tải
+    checkAuth();
+</script>
     <!-- Hạt sáng di chuyển -->
     <div class="particles">
         <div class="particle"></div>
